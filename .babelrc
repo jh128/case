@@ -8,6 +8,12 @@
   ],
   "plugins": [
     "transform-decorators-legacy",
-    "transform-runtime", ["import", {"libraryName":"antd-mobile","style":"css"}]
+    "transform-runtime",
+    ["import", 
+      {
+        "libraryName": "antd-mobile",
+        "style": "css"
+      }
+    ]
   ]
 }

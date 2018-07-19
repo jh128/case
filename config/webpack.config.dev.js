@@ -2,6 +2,7 @@
 
 const autoprefixer = require('autoprefixer');
 const path = require('path');
+const hasha = require('hasha')
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -21,6 +22,11 @@ const publicPath = '/';
 const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
+
+const generateScopedName = (name, filename) => {
+  const hash = hasha(filename + name, {algorithm: 'md5'});
+  return `${name}-${hash.slice(0, 5)}`;
+}
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -149,6 +155,18 @@ module.exports = {
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
               cacheDirectory: true,
+              plugins: [
+                ["react-css-modules", {
+                  context: path.join(__dirname, '..'),
+                  exclude: 'node_modules',
+                  "filetypes": {
+                    ".scss": {
+                      "syntax": "postcss-scss"
+                    }
+                  },
+                  generateScopedName
+                }]
+              ]
             }
           },
           // "postcss" loader applies autoprefixer to our CSS.
@@ -196,7 +214,12 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1
+                  importLoaders: 1,
+                  modules: true,
+                  camelCase: 'dashes',
+                  getLocalIdent({resourcePath}, localIdentName, localName) {
+                    return generateScopedName(localName, resourcePath);
+                  }
                 },
               },
               {
