@@ -1,31 +1,10 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import '../style.scss'
 
-// import CSSModule from 'react-css-modules'
-
-import { getCategories } from '../actionCreator'
-
-import { connect } from 'react-redux'
-
 import { Carousel } from 'antd-mobile';
 
-// connect: 把store里的state,和对state的操作
-const mapState = (state) => {  
-  return {
-    categories: state.wiki.categories
-  }
-}
-
-const mapDispatch = (dispatch) => {
-  return {
-    getData: (action) => {
-      dispatch(action)
-    }
-  }
-}
-
-class Wiki extends React.Component {
+class Wiki extends Component {
   constructor(props) {
     super(props)
 
@@ -65,7 +44,9 @@ class Wiki extends React.Component {
         </Carousel>
         {
           this.props.categories.map((value, index) => {
-            return <div styleName="color" key={value.id}>{value.title}</div>
+            return (
+              <div key={value.id}>{value.title}</div>
+            )
           })
         }
       </div>
@@ -73,8 +54,8 @@ class Wiki extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getData(getCategories())
+    this.props.getCategories()
   }
 }
 
-export default connect(mapState, mapDispatch)(Wiki)
+export default Wiki

@@ -9,7 +9,7 @@
   "plugins": [
     "transform-decorators-legacy",
     "transform-runtime",
-    ["import", 
+    ["import",
       {
         "libraryName": "antd-mobile",
         "style": "css"

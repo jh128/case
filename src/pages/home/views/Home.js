@@ -1,8 +1,9 @@
+// 此Home组件，称之为 容器组件
+
 import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile';
 
-import styles from '../style.scss'
-import CSSModule from 'react-css-modules'
+import '../style.scss'
 
 import wiki from '../../../assets/icons/wiki.svg'
 import wikiLight from '../../../assets/icons/wiki-light.svg'
@@ -13,7 +14,8 @@ import mapLight from '../../../assets/icons/map-light.svg'
 import setting from '../../../assets/icons/setting.svg'
 import settingLight from '../../../assets/icons/setting-light.svg'
 
-import { Wiki } from '../../wiki/'
+import { Ui as Wiki } from '../../wiki'
+import { Ui as Setting } from '../../setting'
 
 class Home extends Component {
   constructor(props) {
@@ -25,6 +27,39 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.props)
+    const mapTab = this.props.isShow ? (
+      <TabBar.Item
+        icon={
+          <div style={{
+            width: '22px',
+            height: '22px',
+            background: 'url(' + map + ') center center /  21px 21px no-repeat' }}
+          />
+        }
+        selectedIcon={
+          <div style={{
+            width: '22px',
+            height: '22px',
+            background: 'url(' + mapLight + ') center center /  21px 21px no-repeat' }}
+          />
+        }
+        title="地图"
+        key="map"
+        dot
+        selected={this.state.selectedTab === 'map'}
+        onPress={() => {
+          this.setState({
+            selectedTab: 'map',
+          });
+        }}
+      >
+        {<div>ccc</div>}
+      </TabBar.Item>
+    ) : () => { // 无状态组件
+      return null
+    }
+
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
@@ -88,33 +123,7 @@ class Home extends Component {
           >
             <div>bbb</div>
           </TabBar.Item>
-          <TabBar.Item
-            icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(' + map + ') center center /  21px 21px no-repeat' }}
-              />
-            }
-            selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(' + mapLight + ') center center /  21px 21px no-repeat' }}
-              />
-            }
-            title="地图"
-            key="map"
-            dot
-            selected={this.state.selectedTab === 'map'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'map',
-              });
-            }}
-          >
-            {<div>ccc</div>}
-          </TabBar.Item>
+         {/* { mapTab } */}
           <TabBar.Item
             icon={{ uri: setting }}
             selectedIcon={{ uri: settingLight }}
@@ -127,7 +136,7 @@ class Home extends Component {
               });
             }}
           >
-            {<div>ddd</div>}
+            <Setting></Setting>
           </TabBar.Item>
         </TabBar>
       </div>
@@ -135,4 +144,4 @@ class Home extends Component {
   }
 }
 
-export default CSSModule(Home, styles)
+export default Home

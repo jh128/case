@@ -1,11 +1,12 @@
+import { GET_CATEGORIES } from './actionTypes'
+
 const defaultValue = {
   categories: []
 }
 
-// reducer是个同步方法，不能做异步操作
-// getData, 负责将action携带的数据取到， 去生成一个新的categroies
-const getData = (state = defaultValue, action) => {  
-  if (action.type === 'GETCATEGORIES') {
+// reducer是个纯函数
+const getCategories = (state = defaultValue, action) => {
+  if (action.type === GET_CATEGORIES) {
     return {
       categories: [...state.categories, ...action.data]
     }
@@ -13,4 +14,4 @@ const getData = (state = defaultValue, action) => {
   return state
 }
 
-export default getData
+export default getCategories

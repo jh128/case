@@ -1,10 +1,15 @@
-const defaultValue = true
+import { IS_SHOW } from './actionTypes'
+const defaultValue = {
+  isShow: false
+}
 
-const show = (state = defaultValue, action) => {
-  if (action.type === 'SHOW') {
-    return !state
+const setVisible = (state = defaultValue, action) => {
+  if (action.type === IS_SHOW) {
+    return {
+      isShow: !state.isShow
+    }
   }
   return state
 }
 
-export default show
+export default setVisible

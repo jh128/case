@@ -1,7 +1,7 @@
-import Home from './views/Home'
+import Ui from './views/Ui'
 import reducer from './reducer'
 
 export {
-  Home,
+  Ui,
   reducer
 }

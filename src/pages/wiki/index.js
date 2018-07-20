@@ -1,7 +1,7 @@
-import Wiki from './views/Wiki'
+import Ui from './views/Ui'
 import reducer from './reducer'
 
 export {
-  Wiki,
+  Ui,
   reducer
 }

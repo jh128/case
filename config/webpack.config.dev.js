@@ -210,13 +210,21 @@ module.exports = {
           {
             test: /\.scss$/,
             use: [
+              // style-loader, 作用是讲JS里的CSS代码抽离出来，放到页面的style标签里
               require.resolve('style-loader'),
               {
+                // css-loader，作用是将CSS代码编译成JS
                 loader: require.resolve('css-loader'),
+                // css模块化：
+                // 解决的是样式冲突的问题
+                // css-loader天生有css模块化的功能：modules:true
+                // css-loader的缺点是引用样式比较麻烦: style.aaa
+                // 因此引入了babel-plugin-react-css-modules
                 options: {
                   importLoaders: 1,
                   modules: true,
                   camelCase: 'dashes',
+                  // getLocalIdent方法返回一个新的样式模块的名字
                   getLocalIdent({resourcePath}, localIdentName, localName) {
                     return generateScopedName(localName, resourcePath);
                   }

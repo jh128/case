@@ -1,0 +1,1 @@
+export const IS_SHOW = 'home/is_show'

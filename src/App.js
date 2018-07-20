@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style/usage/core/reset.scss'
-import Home from './pages/home/views/Home'
+import { Ui as Home } from './pages/home'
 
 class App extends Component {
   render() {

@@ -1,23 +1,25 @@
-// creator可以返回两种数据：
-// 一种是扁平的action
-// 一种是一个函数
-// 要得益于redux-thunk 中间件
+import { GET_CATEGORIES } from './actionTypes'
 
-export const wikiActionCreator = (data) => {
+// 此 actioncreator 返回对象字面量
+const getPlainCategories = (data) => {
   return {
-    type: 'GETCATEGORIES',
+    type: GET_CATEGORIES,
     data
   }
 }
 
-export const getCategories = () => {
-  // 这里为什么可以使用dispatch？
-  // 原因返回的方法被redux-thunk中间件调用了
+// 此 actioncreator 返回是个函数
+const getAsyncCategories = () => {
   return (dispatch) => {
     fetch('/api/index')
-    .then(res => res.json())
-    .then(result => {
-      dispatch(wikiActionCreator(result.data.categories))
-    })
+      .then(response => response.json())
+      .then(data => {
+        dispatch(getPlainCategories(data.data.categories))
+      })
   }
+}
+
+export {
+  getPlainCategories,
+  getAsyncCategories
 }
