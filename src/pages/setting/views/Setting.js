@@ -18,6 +18,7 @@ class Setting extends Component {
 
   handleBtnClick() {
     this.props.setVisible('abc')
+    document.querySelector('div[data-type="map"]').style.display = 'none'
   }
 }
 

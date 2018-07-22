@@ -57,7 +57,7 @@ class Home extends Component {
         {<div>ccc</div>}
       </TabBar.Item>
     ) : () => { // 无状态组件
-      return null
+      return (<div>xxx</div>)
     }
 
     return (
@@ -121,9 +121,37 @@ class Home extends Component {
             }}
             data-seed="logId1"
           >
-            <div>bbb</div>
+            <div>热卖</div>
           </TabBar.Item>
          {/* { mapTab } */}
+         <TabBar.Item
+            icon={
+              <div style={{
+                width: '22px',
+                height: '22px',
+                background: 'url(' + map + ') center center /  21px 21px no-repeat' }}
+              />
+            }
+            selectedIcon={
+              <div style={{
+                width: '22px',
+                height: '22px',
+                background: 'url(' + mapLight + ') center center /  21px 21px no-repeat' }}
+              />
+            }
+            title="地图"
+            key="map"
+            dot
+            selected={this.state.selectedTab === 'map'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'map',
+              });
+            }}
+            data-type="map"
+          >
+            {<div>ccc</div>}
+          </TabBar.Item>
           <TabBar.Item
             icon={{ uri: setting }}
             selectedIcon={{ uri: settingLight }}
