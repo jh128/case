@@ -1,25 +1,36 @@
 import React, { Component } from 'react'
 
 // import styles from '../style.scss'
-import { Button } from 'antd-mobile'
+import { List, Switch } from 'antd-mobile'
+import { createForm } from 'rc-form'
 
 class Setting extends Component {
-  constructor(props) {
-    super(props)
-    console.log(this)
-  }
   render() {
+    const { getFieldProps } = this.props.form;
     return (
       <div>
-        <Button onClick={this.handleBtnClick.bind(this)}>点击</Button>
+        <List
+          renderHeader={() => '设置'}
+        >
+        <List.Item
+          extra={<Switch
+            {
+              ...getFieldProps('Switch1', {
+                initialValue: true,
+                valuePropName: 'checked',
+              })
+            }
+            checked={this.props.isShow}
+            onClick={(checked) => this.handleSwitch.call(this, checked) }
+          />}
+        >是否显示地图：</List.Item>
+      </List>
       </div>
     )
   }
 
-  handleBtnClick() {
-    this.props.setVisible('abc')
-    document.querySelector('div[data-type="map"]').style.display = 'none'
+  handleSwitch(checked) {
+    this.props.setVisible()
   }
 }
-
-export default Setting
+export default createForm()(Setting);

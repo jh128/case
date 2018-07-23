@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import Setting from './Setting'
+import { homeActionTypes } from '../../home/'
 
 const mapState = (state) => {
   return {
@@ -11,7 +12,7 @@ const mapDispatch = (dispatch) => {
   return {
     setVisible(data) {
       dispatch({
-        type: 'home/is_show',
+        type: homeActionTypes.IS_SHOW,
         data
       })
     }

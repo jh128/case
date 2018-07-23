@@ -27,39 +27,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props)
-    const mapTab = this.props.isShow ? (
-      <TabBar.Item
-        icon={
-          <div style={{
-            width: '22px',
-            height: '22px',
-            background: 'url(' + map + ') center center /  21px 21px no-repeat' }}
-          />
-        }
-        selectedIcon={
-          <div style={{
-            width: '22px',
-            height: '22px',
-            background: 'url(' + mapLight + ') center center /  21px 21px no-repeat' }}
-          />
-        }
-        title="地图"
-        key="map"
-        dot
-        selected={this.state.selectedTab === 'map'}
-        onPress={() => {
-          this.setState({
-            selectedTab: 'map',
-          });
-        }}
-      >
-        {<div>ccc</div>}
-      </TabBar.Item>
-    ) : () => { // 无状态组件
-      return (<div>xxx</div>)
-    }
-
     return (
       <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
@@ -93,7 +60,7 @@ class Home extends Component {
             }}
             data-seed="logId"
           >
-            <Wiki />
+            {this.props.homeComponent.component === 'wiki' ? <Wiki /> : (<div>xxx</div>)}
           </TabBar.Item>
           <TabBar.Item
             icon={
@@ -123,8 +90,7 @@ class Home extends Component {
           >
             <div>热卖</div>
           </TabBar.Item>
-         {/* { mapTab } */}
-         <TabBar.Item
+          <TabBar.Item
             icon={
               <div style={{
                 width: '22px',
@@ -150,7 +116,7 @@ class Home extends Component {
             }}
             data-type="map"
           >
-            {<div>ccc</div>}
+            {false ? (<div>ccc</div>) : (<div>xxx</div>)}
           </TabBar.Item>
           <TabBar.Item
             icon={{ uri: setting }}
@@ -169,6 +135,23 @@ class Home extends Component {
         </TabBar>
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.setVisible()
+  }
+
+  componentDidUpdate() {    
+    this.setVisible()
+  }
+
+
+  setVisible() {
+    if (this.props.isShow) {
+      document.querySelector('div[data-type="map"]').style.display = 'flex'
+    } else {
+      document.querySelector('div[data-type="map"]').style.display = 'none'
+    }
   }
 }
 

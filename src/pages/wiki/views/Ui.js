@@ -6,6 +6,8 @@ import Wiki from './Wiki'
 // presentation UI组件，影子组件，傻瓜组件
 import { getAsyncCategories } from '../actionCreator'
 
+import { setHomeComponent } from '../../home/actionCreator'
+
 const mapState = (state) => {
   return {
     categories: state.wiki.categories
@@ -23,6 +25,10 @@ const mapDispatch = (dispatch) => {
     // 自定义方法，专门触发dispatch
     getCategories() {
       dispatch(getAsyncCategories())
+    },
+
+    setHomeComponent(data) {
+      dispatch(setHomeComponent(data))
     }
   }
 }

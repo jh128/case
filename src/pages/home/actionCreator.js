@@ -1,10 +1,15 @@
-import { IS_SHOW } from './actionTypes'
+import { IS_SHOW, SET_HOME_COMPONENT } from './actionTypes'
 
-const setVisible = (data) => {
+export const setVisible = (data) => {
   return {
     type: IS_SHOW,
     data
   }
 }
 
-export default setVisible
+export const setHomeComponent = (data) => {
+  return {
+    type: SET_HOME_COMPONENT,
+    data
+  }
+}

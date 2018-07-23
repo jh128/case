@@ -1,0 +1,19 @@
+{
+  "ret": true,
+  "data": [{
+    "id": "0001",
+    "imgUrl": "https://i3.meishichina.com/attachment/magic/2018/07/23/2018072315323018162888197577.jpg?x-oss-process=style/p800GIF"
+  }, {
+    "id": "0002",
+    "imgUrl": "https://i3.meishichina.com/attachment/magic/2018/07/23/2018072315323018388868197577.jpg?x-oss-process=style/p800GIF"
+  },{
+    "id": "0003",
+    "imgUrl": "https://i3.meishichina.com/attachment/magic/2018/07/20/2018072015320510661318197577.jpg?x-oss-process=style/p800GIF"
+  },{
+    "id": "0004",
+    "imgUrl": "https://i3.meishichina.com/attachment/magic/2018/07/18/2018071815318777563748197577.jpg?x-oss-process=style/p800GIF"
+  },{
+    "id": "0005",
+    "imgUrl": "https://i3.meishichina.com/attachment/magic/2018/07/04/2018070415306689373188197577.jpg?x-oss-process=style/p800GIF"
+  }]
+}

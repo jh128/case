@@ -2,59 +2,77 @@ import React, { Component } from 'react'
 
 import '../style.scss'
 
-import { Carousel } from 'antd-mobile';
+import { Carousel, Grid } from 'antd-mobile';
 
 class Wiki extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      data: ['1', '2', '3'],
+      data: [],
       imgHeight: 176,
     }
   }
 
   render() {
+    const newCate = this.props.categories.map((value) => {
+      return {
+        icon: value.imgUrl,
+        text: value.title,
+        id: value.id
+      }
+    })
     return (
       <div>
         <Carousel
           autoplay={false}
           infinite
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-          afterChange={index => console.log('slide to', index)}
         >
           {this.state.data.map(val => (
             <a
               key={val}
-              href="http://www.alipay.com"
               style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
             >
               <img
-                src={`https://zos.alipayobjects.com/rmsportal/${val}.png`}
+                src={val.imgUrl}
                 alt=""
                 style={{ width: '100%', verticalAlign: 'top' }}
                 onLoad={() => {
-                  // fire window resize event to change height
-                  window.dispatchEvent(new Event('resize'));
                   this.setState({ imgHeight: 'auto' });
                 }}
               />
             </a>
           ))}
         </Carousel>
-        {
-          this.props.categories.map((value, index) => {
-            return (
-              <div key={value.id}>{value.title}</div>
-            )
-          })
-        }
+        <Grid 
+          data={newCate} 
+          columnNum={3} 
+          hasLine={false}
+          onClick={this.handleGridClick.bind(this)}
+        />
       </div>
     )
   }
 
   componentDidMount() {
     this.props.getCategories()
+
+    fetch('/api/swiper')
+      .then(response => response.json())
+      .then(result => {
+        this.setState((prevState) => {
+          return {
+            data: [...prevState.data, ...result.data]
+          }
+        })
+      })
+  }
+
+  handleGridClick(el, index) {
+    this.props.setHomeComponent({
+      component: 'wiki_list',
+      id: el.id
+    })
   }
 }
 
