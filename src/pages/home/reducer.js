@@ -3,7 +3,7 @@ const defaultValue = {
   isShow: true,
   homeComponent: {
     component: 'wiki',
-    id: 0
+    id: '0'
   }
 }
 
@@ -20,7 +20,10 @@ export default (state = defaultValue, action) => {
   if (action.type === SET_HOME_COMPONENT) {
     return {
       ...state,
-      homeComponent: action.data
+      homeComponent: {
+        ...state.homeComponent,
+        ...action.data
+      }
     }
   }
 

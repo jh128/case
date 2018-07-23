@@ -8,7 +8,7 @@ const defaultValue = {
 const getCategories = (state = defaultValue, action) => {
   if (action.type === GET_CATEGORIES) {
     return {
-      categories: [...state.categories, ...action.data]
+      categories: [...action.data]
     }
   }
   return state

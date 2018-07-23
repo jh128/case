@@ -1,0 +1,9 @@
+.thumb {
+  > div:first-child {
+    width: .6rem !important;
+    img {
+      width: 100%;
+      height: .5rem;
+    }
+  }
+}

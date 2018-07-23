@@ -16,6 +16,10 @@ import settingLight from '../../../assets/icons/setting-light.svg'
 
 import { Ui as Wiki } from '../../wiki'
 import { Ui as Setting } from '../../setting'
+import { Ui as WikiList } from '../../wikilist'
+import { Ui as HotList } from '../../hotlist'
+
+import { Route } from 'react-router-dom'
 
 class Home extends Component {
   constructor(props) {
@@ -57,10 +61,13 @@ class Home extends Component {
               this.setState({
                 selectedTab: 'wiki',
               });
+              this.props.setHomeComponent({
+                component: 'wiki'
+              })
             }}
             data-seed="logId"
           >
-            {this.props.homeComponent.component === 'wiki' ? <Wiki /> : (<div>xxx</div>)}
+            {this.props.homeComponent.component === 'wiki' ? <Wiki /> : <Route path="/home/wikilist" component={WikiList} />}
           </TabBar.Item>
           <TabBar.Item
             icon={
@@ -85,10 +92,11 @@ class Home extends Component {
               this.setState({
                 selectedTab: 'hot',
               });
+              this.props.history.push('/home/hotlist')
             }}
             data-seed="logId1"
           >
-            <div>热卖</div>
+            <Route path="/home/hotlist" component={HotList} />
           </TabBar.Item>
           <TabBar.Item
             icon={
