@@ -12,7 +12,7 @@ const handleItemClick = ({id, history, from}) => {
 }
 
 const DataList = ({history, datalist, from}) => {
-  console.log(from)
+  // console.log(from)
   return (
     <List>
       {

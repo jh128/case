@@ -73,6 +73,7 @@ class Wiki extends Component {
       component: 'wiki_list',
       id: el.id
     })
+    this.props.history.push('/home/wikilist')
   }
 }
 

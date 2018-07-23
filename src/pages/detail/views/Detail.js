@@ -12,7 +12,7 @@ class Detail extends Component {
           mode="dark"
           leftContent="返回"
           onLeftClick={() => {
-            this.props.push('/home/' + this.props.match.params.from)
+            this.props.history.push('/home/' + this.props.match.params.from)
           }}
         > 详情页
         </NavBar>

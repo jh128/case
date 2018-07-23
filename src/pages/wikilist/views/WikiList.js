@@ -16,6 +16,7 @@ class WikiList extends Component {
       <List
         history={this.props.history}
         datalist={this.state.wikilist}
+        from="wikilist"
       />
     )
   }

@@ -18,6 +18,7 @@ import { Ui as Wiki } from '../../wiki'
 import { Ui as Setting } from '../../setting'
 import { Ui as WikiList } from '../../wikilist'
 import { Ui as HotList } from '../../hotlist'
+import { Ui as Map } from '../../map'
 
 import { Route } from 'react-router-dom'
 
@@ -25,7 +26,7 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'wiki',
+      selectedTab: 'wikilist',
       hidden: false
     }
   }
@@ -55,19 +56,20 @@ class Home extends Component {
               background: 'url(' + wikiLight + ') center center /  21px 21px no-repeat' }}
             />
             }
-            selected={this.state.selectedTab === 'wiki'}
+            selected={this.state.selectedTab === 'wikilist'}
             badge={1}
             onPress={() => {
               this.setState({
-                selectedTab: 'wiki',
+                selectedTab: 'wikilist',
               });
               this.props.setHomeComponent({
                 component: 'wiki'
               })
+              this.props.history.push('/home')
             }}
             data-seed="logId"
           >
-            {this.props.homeComponent.component === 'wiki' ? <Wiki /> : <Route path="/home/wikilist" component={WikiList} />}
+            {this.props.homeComponent.component === 'wiki' ? <Route path="/home" component={Wiki} /> : <Route path="/home/wikilist" component={WikiList} />}
           </TabBar.Item>
           <TabBar.Item
             icon={
@@ -87,10 +89,10 @@ class Home extends Component {
             title="热卖"
             key="hot"
             badge={'new'}
-            selected={this.state.selectedTab === 'hot'}
+            selected={this.state.selectedTab === 'hotlist'}
             onPress={() => {
               this.setState({
-                selectedTab: 'hot',
+                selectedTab: 'hotlist',
               });
               this.props.history.push('/home/hotlist')
             }}
@@ -124,7 +126,7 @@ class Home extends Component {
             }}
             data-type="map"
           >
-            {false ? (<div>ccc</div>) : (<div>xxx</div>)}
+            <Map />
           </TabBar.Item>
           <TabBar.Item
             icon={{ uri: setting }}
@@ -147,6 +149,10 @@ class Home extends Component {
 
   componentDidMount() {
     this.setVisible()
+    let from = this.props.location.pathname.substr(6)
+    this.setState({
+      selectedTab: from || 'wikilist'
+    })
   }
 
   componentDidUpdate() {    
