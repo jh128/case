@@ -71,6 +71,7 @@ class Home extends Component {
           >
             {this.props.homeComponent.component === 'wiki' ? <Route path="/home" component={Wiki} /> : <Route path="/home/wikilist" component={WikiList} />}
           </TabBar.Item>
+          
           <TabBar.Item
             icon={
               <div style={{
